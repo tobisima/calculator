@@ -41,7 +41,8 @@ function populateDisplay(e) {
 operatorButtons.forEach(operatorButton =>
   operatorButton.onclick = assignOperator);
 
-  function assignOperator(e) {
+function assignOperator(e) {
+  if (operatorValue && screenValueB) showResult();
   screenValueA = screen.textContent;
   operatorValue = e.target.id;
 }
