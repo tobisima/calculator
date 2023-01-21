@@ -2,6 +2,7 @@ const screen = document.querySelector('.screen');
 const numButtons = document.querySelectorAll('.number');
 const operatorButtons = document.querySelectorAll('.operator');
 const equalsButton = document.querySelector('.equals');
+const clearButton = document.querySelector('.clear');
 let screenValueA = '';
 let screenValueB = '';
 let operatorValue;      
@@ -56,3 +57,12 @@ function showResult() {
   operate(window[operatorValue], screenValueA, screenValueB);
   screenValueB = '';  
 }
+
+clearButton.onclick = clearScreen;
+
+function clearScreen() {
+  screen.textContent = '';
+  operatorValue = '';
+}
+
+
