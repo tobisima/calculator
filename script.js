@@ -24,15 +24,19 @@ function divide(a, b) {
 }
  
 function operate(operator, a, b) {
-  screen.textContent = +operator(+a, +b).toFixed(8);
-  screen.textContent = screen.textContent.slice(0, 10);
+  if (divide && b == 0) {
+    screen.textContent = ':)';
+  } else {
+    screen.textContent = +operator(+a, +b).toFixed(8);
+    screen.textContent = screen.textContent.slice(0, 10);
+  }
 }
 
 numButtons.forEach(numButton =>
   numButton.onclick = populateDisplay);
   
-function populateDisplay(e) {
-  if (!operatorValue) {
+  function populateDisplay(e) {
+    if (!operatorValue) {
     if (screen.textContent.length === 10) return;
     screen.textContent += e.target.textContent;
   } else {
@@ -45,17 +49,17 @@ function populateDisplay(e) {
 operatorButtons.forEach(operatorButton =>
   operatorButton.onclick = assignOperator);
 
-function assignOperator(e) {
-  if (operatorValue && screenValueB) showResult();
+  function assignOperator(e) {
+    if (operatorValue && screenValueB) showResult();
   screenValueA = screen.textContent;
   operatorValue = e.target.id;
 }
-  
+
 equalsButton.onclick = showResult; 
 
 function showResult() {
   operate(window[operatorValue], screenValueA, screenValueB);
-  screenValueB = '';  
+  screenValueB = '';    
 }
 
 clearButton.onclick = clearScreen;
