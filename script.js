@@ -68,6 +68,8 @@ clearButton.onclick = clearScreen;
 function clearScreen() {
   screen.textContent = '';
   operatorValue = '';
+  screenValueA = '';
+  screenValueB = '';
 }
 
 

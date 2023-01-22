@@ -10,36 +10,58 @@ body {
     justify-content: center;
 }
 
+button {
+  font-size: 4vh;
+  font-weight: bold;
+}
+
 .main {  
   height: 80vh;
   width: 65vh;
   margin-top: 5vh;
   border: solid;
+  border-radius: 4px;
 }
 
 .screen {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    height: 15%;
-    border: solid;
-    font-size: 9.5vh;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 15%;
+  border: solid;
+  font-size: 9.5vh;
+  background-color: rgb(217, 244, 236);
 }
 
 .buttons-panel {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    height: 85%;
-    border: solid;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: 85%;
+  border: solid;
 }
 
 .equals {
   grid-column-start: 3;
   grid-row-start: 4;
   grid-row-end: 6;
+  background-color: rgb(35, 179, 88);
 }
 
 .clear {
   grid-column-start:1 ;
   grid-column-end: 3;
+  background-color: hsl(354, 65%, 51%);
+}
+
+.operator {
+  background-color: rgb(135, 191, 212);
+}
+
+.backspace {
+  background-color: rgb(245, 158, 51);
+  font-size: 3vh;
+}
+
+.number {
+  background-color: rgb(208, 202, 194);
 }
