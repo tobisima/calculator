@@ -35,8 +35,9 @@ function operate(operator, a, b) {
 numButtons.forEach(numButton =>
   numButton.onclick = populateDisplay);
   
-  function populateDisplay(e) {
-    if (!operatorValue) {
+function populateDisplay(e) {
+  if (screen.textContent.includes('.') && e.target.textContent === '.') return;
+  if (!operatorValue) {  
     if (screen.textContent.length === 10) return;
     screen.textContent += e.target.textContent;
   } else {
@@ -49,8 +50,8 @@ numButtons.forEach(numButton =>
 operatorButtons.forEach(operatorButton =>
   operatorButton.onclick = assignOperator);
 
-  function assignOperator(e) {
-    if (operatorValue && screenValueB) showResult();
+function assignOperator(e) {
+  if (operatorValue && screenValueB) showResult();
   screenValueA = screen.textContent;
   operatorValue = e.target.id;
 }
