@@ -3,6 +3,7 @@ const numButtons = document.querySelectorAll('.number');
 const operatorButtons = document.querySelectorAll('.operator');
 const equalsButton = document.querySelector('.equals');
 const clearButton = document.querySelector('.clear');
+const backspaceButton = document.querySelector('.backspace');
 let screenValueA = '';
 let screenValueB = '';
 let operatorValue;      
@@ -70,6 +71,12 @@ function clearScreen() {
   operatorValue = '';
   screenValueA = '';
   screenValueB = '';
+}
+
+backspaceButton.onclick = deleteLastChar;
+
+function deleteLastChar() {
+  screen.textContent = screen.textContent.slice(0, length-1);
 }
 
 
