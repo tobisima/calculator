@@ -25,7 +25,7 @@ function divide(a, b) {
 }
  
 function operate(operator, a, b) {
-  if (divide && b == 0) {
+  if (operator === divide && b == 0) {
     screen.textContent = ':)';
   } else {
     screen.textContent = +operator(+a, +b).toFixed(8);
@@ -34,27 +34,27 @@ function operate(operator, a, b) {
 }
 
 numButtons.forEach(numButton =>
-  numButton.onclick = populateDisplay);
+  numButton.onclick = () => populateDisplay(numButton.textContent));
   
-function populateDisplay(e) {
-  if (screen.textContent.includes('.') && e.target.textContent === '.') return;
+function populateDisplay(targetValue) {
+  if (screen.textContent.includes('.') && targetValue === '.') return;
   if (!operatorValue) {  
     if (screen.textContent.length === 10) return;
-    screen.textContent += e.target.textContent;
+    screen.textContent += targetValue;
   } else {
     if (screenValueB.length === 10) return;  
-    screenValueB += e.target.textContent;
+    screenValueB += targetValue;
     screen.textContent = screenValueB;
   }
 }
       
 operatorButtons.forEach(operatorButton =>
-  operatorButton.onclick = assignOperator);
+  operatorButton.onclick = () => assignOperator(operatorButton.id));
 
-function assignOperator(e) {
+function assignOperator(targetValue) {
   if (operatorValue && screenValueB) showResult();
   screenValueA = screen.textContent;
-  operatorValue = e.target.id;
+  operatorValue = targetValue;
 }
 
 equalsButton.onclick = showResult; 
@@ -77,6 +77,26 @@ backspaceButton.onclick = deleteLastChar;
 
 function deleteLastChar() {
   screen.textContent = screen.textContent.slice(0, length-1);
+  screenValueB = screenValueB.slice(0, length-1);
 }
 
+document.addEventListener('keydown', inputByKeyboard);
 
+function inputByKeyboard(e) {
+  e.preventDefault();
+  if (e.key === 'Backspace') deleteLastChar();
+  if (e.key === 'Escape' || e.key === 'Delete') clearScreen();
+  if (e.key === '=' || e.key === 'Enter') showResult();
+  if (e.key === '/' || e.key === '*' || e.key === '-' || e.key === '+') {
+    assignOperator(assignOperatorValue()); 
+  }
+      
+  if (!(+e.key) && e.key != 0 && e.key !== '.') return;
+    populateDisplay(e.key);
+
+  function assignOperatorValue() {
+    return e.key === '/' ? 'divide' :
+           e.key === '*' ? 'multiply' :
+           e.key === '-' ? 'subtract' : 'add';
+  }
+}
